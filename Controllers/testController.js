@@ -17,9 +17,6 @@ exports.submit = async function(req, res){
 	let tries = parseInt(await W.searchValue('tries', 'id_word', req.session.precedentIndex), 10);
 	let successes = parseInt(await W.searchValue('successes', 'id_word', req.session.precedentIndex),10);
 
-	console.log(tries);
-	console.log(successes);
-
 	if(answer.toLowerCase() === correctAnswer.toString().toLowerCase()){
 		answerResp = 'correct';
 		await W.update({'tries' : tries+=1, 'successes' : successes+=1}, 'id_word', req.session.precedentIndex)
@@ -28,8 +25,6 @@ exports.submit = async function(req, res){
 		answerResp = 'wrong';
 		await W.update({'tries' : tries+=1}, 'id_word', req.session.precedentIndex)
 	}
-
-
 
 	random(req, res, answer=answerResp, precedentWord=req.session.precedentWord, req.session.precedentTranslation);
 	
