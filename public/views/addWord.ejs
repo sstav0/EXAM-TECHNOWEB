@@ -1,0 +1,48 @@
+<html>
+	<head>
+		<title id="SHOPPING_LIST">SHOPPING LIST</title>
+		<link rel="stylesheet" href="../css/style-addWord.css">
+	</head>
+	<body>
+		<div id="class-container">
+			<h1>WORDS</h1>
+
+			<table class="words-table">
+				<thead>
+					<tr>
+						<th>Word</th>
+						<th>Translation</th>
+						<th>Success Rate</th>
+						<th></th> 
+					</tr>
+				</thead>
+				<tbody>
+					<% words.forEach(word => { %>
+						<tr>
+							<td><%= word.word %></td>
+							<td><%= word.translation %></td>
+							<td><%= Math.round((word.successes / word.tries).toFixed(2) * 100) %>%</td>
+							<td>
+								<form action="/delete" method="post">
+									<button type="submit" id="deleteWord" name="deleteWord" value="<%=word.id_word %>"> DELETE</button>
+								</form>
+							</td>
+						</tr>
+					<% }) %>  
+				</tbody>
+			</table>
+
+			<form action="/addWordTable" method="post">
+				<label for="word">Your word : </label>
+				<input type="text" id="word" name="word" required>
+				<label for="translation">Your translation : </label>
+				<input type="text" id="translation" name="translation" required>
+				<button type="submit" id="submit">ADD</button>
+			</form>
+
+			<form action="/" method="get">
+				<button type="submit" id="tryYourself">TRY YOURSELF</button>
+			</form>
+		</div>
+	</body>
+</html>

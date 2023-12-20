@@ -1,19 +1,12 @@
-.button-container {
-    display: flex;
+.wrong{
+    color: green;
 }
 
-.checked {
-    text-decoration: line-through;
-    font-size: larger;
-    color: #ff0000;
+.correct{
+    color: red;
 }
 
-.unchecked {
-    font-size: larger;
-    color: #03b000;
-}
-
-#del, #check {
+button{
     font-weight: bold;
     background-color: steelblue;
     color: white;

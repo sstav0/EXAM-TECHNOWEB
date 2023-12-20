@@ -3,7 +3,7 @@ const connection = mysql.createPool({
     host: "localhost",
     user: "root",
     password: "root",
-    database: "shopping", //=> Change to your database name
+    database: "db_languages", 
     waitForConnections: true, 
     connectionLimit: 10, 
     queueLimit: 0, 
@@ -37,7 +37,6 @@ class Model {
     async update(payload, wherecolum, wherevalue) {
         const keys = Object.keys(payload).join(" = ?, ") + " = ?";
         const values = Object.values(payload);
-        //console.log(`UPDATE ${this.tableName} SET ${keys} WHERE ${wherecolum} = ?;`, [...values, wherevalue]);
         try {
             await connection.query(`UPDATE ${this.tableName} SET ${keys} WHERE ${wherecolum} = ?;`, [...values, wherevalue]);
         } catch (error) {
@@ -60,9 +59,10 @@ class Model {
 		let List = []
 		try {
 			const[rows] = await connection.query(`SELECT ${condition} FROM ${this.tableName};`)
-			rows.forEach(function(row) {
-				List.push(row.username); // Ajouter chaque username à la liste
-			});
+            return rows
+			// rows.forEach(function(row) {
+			// 	List.push(row.username); // Ajouter chaque username à la liste
+			// });
 		} catch(error) {
             console.error('Erreur lors du chargement spécifique :', error);
             throw error;
